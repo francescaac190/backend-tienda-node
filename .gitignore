@@ -1,0 +1,22 @@
+# Node
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env files
+.env
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+
+# Data (si quieres no subir productos reales)
+data/*.json
+
+# Typescript build
+*.tsbuildinfo
