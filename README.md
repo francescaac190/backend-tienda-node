@@ -121,7 +121,10 @@ DELETE	/api/products/:id	Eliminar producto
 ## 👩‍💻 Autora
 
 Francesca Antelo
+
 Desarrolladora Full Stack • Flutter • Backend Node.js
+
 📍 Santa Cruz, Bolivia
+
 💼 Portafolio y proyectos: en construcción
 
