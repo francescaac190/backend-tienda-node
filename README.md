@@ -1,45 +1,57 @@
 # 🛍️ Node.js Store API  
+
 API REST construida con **Node.js, Express y TypeScript**, diseñada como parte de mi portafolio backend.  
-Actualmente utiliza almacenamiento en **archivo JSON** para entender las capas del backend  
+Actualmente utiliza almacenamiento en **archivos JSON** para entender bien las capas de un backend  
 y posteriormente será migrada a **Prisma + MySQL**.
 
 ---
 
 ## 🚀 Características principales
 
-- API REST con Express + TypeScript  
-- Arquitectura por capas (Routes → Controllers → Services → Repository → Data)  
-- CRUD completo de productos  
-- Manejo de errores centralizado  
-- Variables de entorno con dotenv  
-- Persistencia en archivo JSON (simulación de BD)  
-- Scripts para desarrollo y producción  
+- API REST con **Express + TypeScript**
+- Arquitectura por capas:  
+  **Routes → Controllers → Services → Repositories → Data**
+- CRUD completo de productos
+- Persistencia en **archivo JSON** (simulación de BD)
+- Manejo de errores centralizado (middlewares)
+- Variables de entorno con **dotenv**
+- Módulo de **usuarios + autenticación con JWT** (registro, login, /me)
+- Rutas de productos **protegidas por token**
+- Scripts separados para desarrollo y producción
 
 ---
 
 ## 📁 Estructura del proyecto
+
 ```bash
 src/
-├─ routes/
-├─ controllers/
-├─ services/
-├─ models/
-├─ middlewares/
-├─ config/
+├─ config/          # Configuración (env, prisma en el futuro, etc.)
+├─ controllers/     # Capa que maneja req/res HTTP
+├─ helpers/         # Utilidades (por ejemplo, helpers de JWT)
+├─ middlewares/     # Middlewares de Express: auth, errores, 404, etc.
+├─ models/          # Interfaces/Tipos (Product, User, DTOs)
+├─ repositories/    # Acceso a datos (lectura/escritura JSON; luego DB)
+├─ routes/          # Definición de endpoints y montaje de controladores
+├─ services/        # Lógica de negocio (reglas de la app)
+├─ app.ts           # Configuración de la app de Express
+└─ server.ts        # Punto de entrada: levanta el servidor
+
 data/
+├─ products.json    # "Base de datos" de productos
+└─ users.json       # "Base de datos" de usuarios
+
 .gitignore
 package.json
 tsconfig.json
 README.md
 ```
-
 ---
 
 ## ⚙️ Instalación
 
 ```bash
-git clone https://github.com/<tu-usuario>/nodejs-store-api.git
-cd nodejs-store-api
+git clone https://github.com/francescaac190/backend-tienda-node.git
+cd backend-tienda-node
 npm install
 ```
 
@@ -73,6 +85,41 @@ http://localhost:3000/api
 GET /api/health
 Devuelve el estado del servidor.
 
+## 🔹 Auth (Usuarios)
+Registro
+
+POST /api/auth/register
+
+Body:
+```bash
+{
+  "name": "Francesca",
+  "email": "fran@example.com",
+  "password": "123456"
+}
+```
+
+## 🔹 Login
+
+POST /api/auth/login
+
+Body:
+```bash
+
+{
+  "email": "fran@example.com",
+  "password": "123456"
+}
+```
+
+Devuelve: datos básicos del usuario + token JWT.
+
+## 🔹 Perfil (/me)
+
+GET /api/auth/me
+
+Header: Authorization: Bearer <token>
+
 ## 🔹 Productos
 Método	Endpoint	Descripción
 GET	/api/products	Listar todos los productos
@@ -100,6 +147,8 @@ DELETE	/api/products/:id	Eliminar producto
 - Express
 - TypeScript
 - File System (fs)
+- jsonwebtoken (JWT)
+- bcryptjs para hash de contraseñas
 - ts-node-dev
 - dotenv
 - Git + GitHub
@@ -109,7 +158,6 @@ DELETE	/api/products/:id	Eliminar producto
 ## 🔮 Próximas mejoras
 
 - Migración completa a Prisma + MySQL
-- Autenticación con JWT
 - Roles de usuario (admin / cliente)
 - Validaciones con Zod
 - Documentación Swagger
