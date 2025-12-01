@@ -1,8 +1,5 @@
-import { Product, CreateProductDTO, UpdateProductDTO } from '../models/product.mode';
+import { Product, CreateProductDTO, UpdateProductDTO } from '../models/product.model';
 import { readProductsFromFile, writeProductsToFile } from '../repositories/product.file.repo';
-
-let products: Product[] = [];
-let currentId = 1;
 
 export const productService = {
     async findAll(): Promise<Product[]> {

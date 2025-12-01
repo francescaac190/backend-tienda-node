@@ -1,7 +1,7 @@
 // src/controllers/product.controller.ts
 import { Request, Response, NextFunction } from 'express';
 import { productService } from '../services/product.service';
-import { CreateProductDTO, UpdateProductDTO } from '../models/product.mode';
+import { CreateProductDTO, UpdateProductDTO } from '../models/product.model';
 
 export const productController = {
   getAll: async (req: Request, res: Response, next: NextFunction) => {
