@@ -8,17 +8,19 @@ y posteriormente será migrada a **Prisma + MySQL**.
 
 ## 🚀 Características principales
 
-- API REST con **Express + TypeScript**
-- Arquitectura por capas:  
-  **Routes → Controllers → Services → Repositories → Data**
-- CRUD completo de productos
-- Persistencia en **archivo JSON** (simulación de BD)
-- Manejo de errores centralizado (middlewares)
-- Variables de entorno con **dotenv**
-- Módulo de **usuarios + autenticación con JWT** (registro, login, /me)
-- Rutas de productos **protegidas por token**
+- Backend en Node.js + Express + TypeScript
+- Arquitectura limpia por capas:
+- Routes → Controllers → Services → Repositories → Domain/Models
+- CRUD de productos
+- Autenticación JWT (registro, login, perfil con /me)
+- Validación de credenciales y hashing con bcrypt
+- Módulo de carrito (Cart): (Agregar productos, actualizar cantidades, eliminar items, vaciar carrito, obtener carrito)
+- Módulo de órdenes (Orders): (Crear orden desde el carrito, guardar items, total y estado pending, listar órdenes del usuario)
+- Middleware global de manejo de errores
+- Uso de variables de entorno con dotenv
 - Scripts separados para desarrollo y producción
-
+- Migración activa a Prisma + MySQL:
+- Carrito y órdenes ya utilizan MySQL mediante repositorios Prisma
 ---
 
 ## 📁 Estructura del proyecto
@@ -139,6 +141,23 @@ DELETE	/api/products/:id	Eliminar producto
 }
 ```
 
+## 🛒 Carrito (Cart)
+
+| Método | Endpoint        | Descripción                 |
+| ------ | --------------- | --------------------------- |
+| GET    | /api/cart       | Obtener mi carrito          |
+| POST   | /api/cart       | Agregar producto al carrito |
+| PUT    | /api/cart       | Actualizar cantidad         |
+| DELETE | /api/cart       | Eliminar item               |
+| DELETE | /api/cart/clear | Vaciar carrito              |
+
+## 🧾 Órdenes (Orders)
+
+| Método | Endpoint    | Descripción                  |
+| ------ | ----------- | ---------------------------- |
+| POST   | /api/orders | Crear orden desde el carrito |
+| GET    | /api/orders | Listar mis órdenes           |
+
 ---
 
 ## 🛠️ Tecnologías utilizadas
@@ -146,6 +165,8 @@ DELETE	/api/products/:id	Eliminar producto
 - Node.js
 - Express
 - TypeScript
+- Prisma ORM
+- MySQL
 - File System (fs)
 - jsonwebtoken (JWT)
 - bcryptjs para hash de contraseñas
@@ -157,7 +178,6 @@ DELETE	/api/products/:id	Eliminar producto
 
 ## 🔮 Próximas mejoras
 
-- Migración completa a Prisma + MySQL
 - Roles de usuario (admin / cliente)
 - Validaciones con Zod
 - Documentación Swagger
