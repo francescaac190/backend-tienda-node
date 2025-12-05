@@ -20,3 +20,4 @@ data/*.json
 
 # Typescript build
 *.tsbuildinfo
+/src/generated/prisma

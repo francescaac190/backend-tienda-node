@@ -4,7 +4,7 @@ import { User } from '../models/user.model';
 
 export interface JwtPayload {
   userId: number;
-  role: 'user' | 'admin';
+  role: string;
 }
 
 export const signToken = (user: User): string => {

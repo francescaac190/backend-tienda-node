@@ -4,8 +4,8 @@ export interface User {
     name: string,
     email: string,
     passwordHash: string,
-    role: 'user' | 'admin',
-    createAt: Date,
+    role: string,
+    createdAt: Date,
     updatedAt: Date,
 }
 
